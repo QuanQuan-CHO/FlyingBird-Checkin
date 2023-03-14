@@ -1,8 +1,9 @@
 name: Suying666-Auto-Checkin
 on:
-  workflow_dispatch
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
   schedule:
     - cron: '0 1 * * *'
 jobs:
