@@ -20,19 +20,13 @@ jobs:
           cache: 'pip'
       - run: pip install -r requirements.txt
 
-      - name: 3. do sign in...
-        run: python index.py "$EMAIL" "$PASSWD"
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          PASSWD: ${{ secrets.PASSWD }}
-          KEY: ${{ secrets.KEY }}
+      - name: 3. do checkin...
+        run: python index.py ${{ secrets.EMAIL }} ${{ secrets.PASSWD }}
 
       - name: 4. update github repository...
         run: |
-          git config --global user.email "$EMAIL"
+          git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name "bot"
           git add .
           git commit -m "auto-update"
           git push -f
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
