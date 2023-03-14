@@ -6,8 +6,6 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-# server酱key
-key = ''
 # 账号
 email = ''
 # 密码
@@ -83,20 +81,7 @@ def clockIn(host):
     return json
 
 
-def sendMessage(msg):
-    # print(msg)
-    if key:
-        res = requests.post(
-            url='https://sc.ftqq.com/' + key + '.send',
-            data={
-                'title': '速鹰666自动签到结果通知',
-                'desp': msg
-            }
-        )
-        # print(res.text)
-
-
-def main_handler(event, context):
+def main_handler():
     hosts = [i.strip() for i in open('hosts.txt', 'r', encoding='utf-8').readlines()]
     for host in hosts:
         try:
@@ -105,12 +90,7 @@ def main_handler(event, context):
             json = clockIn(host)
             msg = json['msg']
             ret = json['ret']
-            # print(lmsg + '今日签到 ' + msg)
-            if ret == 1:
-                sendMessage(lmsg + '今日签到 ' + msg)
-                break
-            else:
-                break
+            print(lmsg + '今日签到 ' + msg)
         except Exception as e:
             print(e)
 
@@ -118,11 +98,11 @@ def main_handler(event, context):
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     if len(sys.argv) != 4:
-        print(f'usage:python3 {sys.argv[0]} "email" "passwd" "key"')
+        print(f'usage:python3 {sys.argv[0]} "email" "passwd"')
         exit()
     print(datetime.datetime.now())
-    email, passwd, key = sys.argv[1:]
+    email, passwd = sys.argv[1:]
     if (not len(email)) or (not len(passwd)):
         print('email or passwd is null')
         exit()
-    main_handler({}, {})
+    main_handler()

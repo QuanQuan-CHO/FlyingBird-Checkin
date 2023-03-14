@@ -1,4 +1,4 @@
-name: Suying666-auto-clock-in
+name: Suying666-Auto-Checkin
 on:
   push:
     branches: [ master ]
@@ -6,7 +6,7 @@ on:
     - cron: '0 1 * * *'
 jobs:
   build:
-    name: Suying666-clock-in by GitHub Actions
+    name: Suying666-Checkin by GitHub Actions
     runs-on: ubuntu-18.04
 
     steps:
@@ -21,7 +21,7 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: 3. do sign in...
-        run: python index.py "$EMAIL" "$PASSWD" "$KEY"
+        run: python index.py "$EMAIL" "$PASSWD"
         env:
           EMAIL: ${{ secrets.EMAIL }}
           PASSWD: ${{ secrets.PASSWD }}
