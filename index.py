@@ -96,9 +96,6 @@ def main_handler():
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    if len(sys.argv) != 4:
-        print(f'usage:python3 {sys.argv[0]} "email" "passwd"')
-        exit()
     print(datetime.datetime.now())
     email, passwd = sys.argv[1:]
     if (not len(email)) or (not len(passwd)):
