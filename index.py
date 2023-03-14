@@ -71,7 +71,6 @@ def checkin(host) -> str:
 
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    print(datetime.datetime.now())
     email, passwd = sys.argv[1:]
 
     hosts = [line.strip() for line in open('hosts.txt', 'r', encoding='utf-8').readlines()]
