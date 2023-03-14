@@ -10,7 +10,7 @@
 2. 先在Actions页面将GitHub Action启用，再选择对应的workflow，将scheduled workflow启用
    ![enable-schedule-workflow](https://user-images.githubusercontent.com/90035785/224888848-be15ba52-1892-4a2b-9cef-b321b9a25165.jpg)
 
-3. UTC时间的每天01:00分（北京时间：09:00，并不准时），github actions会自动帮助您签到领取流量
+3. 北京时间的每天00:00（UTC：16:00，高峰期可能会有延迟），GitHub Actions会自动签到领取流量
 
 4. Enjoy it!!!
 
