@@ -89,7 +89,6 @@ def main_handler():
             lmsg = login(host)
             json = clockIn(host)
             msg = json['msg']
-            ret = json['ret']
             print(lmsg + '今日签到 ' + msg)
         except Exception as e:
             print(e)
