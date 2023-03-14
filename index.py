@@ -18,7 +18,7 @@ session = requests.session()
 
 # 登陆
 def login(host):
-    url = '{}/auth/login'.format(host)
+    url = f'{host}/auth/login'
     params = {
         'email': email,
         'passwd': passwd,
@@ -30,7 +30,7 @@ def login(host):
         'Accept-Language': 'zh-CN,zh;q=0.9',
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'Origin': url,
-        'Referer': '{}/auth/login'.format(url),
+        'Referer': f'{url}/auth/login',
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
         'X-Requested-With': 'XMLHttpRequest',
     }
@@ -41,7 +41,7 @@ def login(host):
     if msg == '登录成功':
         # 登陆成功之后，去更新hosts.txt
         del headers['Content-Type']
-        html = session.get('{}/user'.format(host), headers=headers).text
+        html = session.get(f'{host}/user', headers=headers).text
         soup = BeautifulSoup(html, 'lxml')
         hosts = set()
         for i in soup.find_all('h5'):
@@ -50,7 +50,7 @@ def login(host):
                 hosts.add(a.text)
         with open('hosts.txt', 'w', encoding='utf-8') as f:
             for i in hosts:
-                f.write('{}\n'.format(i))
+                f.write(f'{i}\n')
         # 获取登陆信息
         statistics = soup.find_all(class_='card card-statistic-2')
         for i in statistics:
@@ -66,14 +66,14 @@ def login(host):
 
 # 速鹰666签到领流量
 def clockIn(host):
-    url = '{}/user/checkin'.format(host)
+    url = f'{host}/user/checkin'
     headers = {
         'Connection': 'keep-alive',
         'Content-Length': '0',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
         'X-Requested-With': 'XMLHttpRequest',
         'Origin': url,
-        'Referer': '{}/user'.format(host),
+        'Referer': f'{host}/user',
         'Accept-Encoding': 'gzip, deflate',
         'Accept-Language': 'zh-CN,zh;q=0.9',
     }
@@ -118,7 +118,7 @@ def main_handler(event, context):
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     if len(sys.argv) != 4:
-        print('usage:python3 {} "email" "passwd" "key"'.format(sys.argv[0]))
+        print(f'usage:python3 {sys.argv[0]} "email" "passwd" "key"')
         exit()
     print(datetime.datetime.now())
     email, passwd, key = sys.argv[1:]
