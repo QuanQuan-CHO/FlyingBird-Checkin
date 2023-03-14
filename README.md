@@ -10,15 +10,9 @@
 2. 先在Actions页面将GitHub Action启用，再选择对应的workflow，将scheduled workflow启用
    ![enable-schedule-workflow](https://user-images.githubusercontent.com/90035785/224888848-be15ba52-1892-4a2b-9cef-b321b9a25165.jpg)
 
-3. [配置Token](https://github.com/settings/tokens)->Generate new token->勾选`public_repo`权限
+3. UTC时间的每天01:00分（北京时间：09:00，并不准时），github actions会自动帮助您签到领取流量
 
-   注意Token的过期时间，过期后GitHub Actions将失效
-
-   和第一步相同，在仓库Settings中配置secret变量`TOKEN`
-
-4. UTC时间的每天01:00分（北京时间：09:00，并不准时），github actions会自动帮助您签到领取流量
-
-5. Enjoy it!!!
+4. Enjoy it!!!
 
 # 特性
 
