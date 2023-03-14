@@ -6,7 +6,7 @@ on:
 permissions: write-all
 jobs:
   checkin:
-    name: Suying666-Checkin by GitHub Actions
+    name: Suying666-Checkin
     runs-on: ubuntu-18.04
 
     steps:
