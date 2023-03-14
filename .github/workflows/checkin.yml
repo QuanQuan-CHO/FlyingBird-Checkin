@@ -3,16 +3,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 1 * * *'
+permissions: write-all
 jobs:
-  build:
+  checkin:
     name: Suying666-Checkin by GitHub Actions
     runs-on: ubuntu-18.04
 
     steps:
       - name: 1. git checkout...
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3
 
       - name: 2. setup python3...
         uses: actions/setup-python@v4
