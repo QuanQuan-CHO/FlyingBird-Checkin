@@ -52,7 +52,7 @@ if __name__ == '__main__':
     hosts = [line.strip() for line in open('hosts.txt', 'r', encoding='utf-8').readlines()]
     for host in hosts:
         try:
-            log(datetime.date.today())
+            log(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             login(host)
             log(f'login {host}')
             log(checkin(host)+'\n')
