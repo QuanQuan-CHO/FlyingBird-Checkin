@@ -28,4 +28,9 @@ jobs:
           git config --global user.name "bot"
           git add .
           git commit -m "auto-update"
-          git push -f
+
+      - name: 5. push changes to repository...
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: master
