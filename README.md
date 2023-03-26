@@ -1,4 +1,4 @@
-# suying666-clock-in
+# Suying666-Checkin
 
 速鹰666自动签到领流量，配合GitHub Actions使用
 
