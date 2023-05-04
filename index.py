@@ -57,6 +57,7 @@ if __name__ == '__main__':
             login(host)
             log(f'login {host}')
             log(checkin(host)+'\n')
-            break
+            return
         except Exception as e:
-            log(e)
+            continue
+    log("服务器炸了")
