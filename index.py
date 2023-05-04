@@ -27,6 +27,8 @@ def login(host):
     msg = res.json()['msg']
     if msg == '登录成功':
         # 登陆成功之后，更新hosts.txt
+        log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
+        log(f'login {host}')
         html = session.get(f'{host}/user').text
         soup = BeautifulSoup(html, 'lxml')
         hosts = []
@@ -53,11 +55,10 @@ if __name__ == '__main__':
     hosts = [line.strip() for line in open('hosts.txt', 'r', encoding='utf-8').readlines()]
     for host in hosts:
         try:
-            log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
             login(host)
-            log(f'login {host}')
             log(checkin(host)+'\n')
             return
         except Exception as e:
             continue
-    log("服务器炸了")
+    log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
+    log("服务器炸了\n")
