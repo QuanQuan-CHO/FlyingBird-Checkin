@@ -57,7 +57,7 @@ if __name__ == '__main__':
         try:
             login(host)
             log(checkin(host)+'\n')
-            return
+            exit(0)
         except Exception as e:
             continue
     log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
