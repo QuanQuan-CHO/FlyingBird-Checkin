@@ -1,64 +1,41 @@
 import datetime
 import os
-import re
 import sys
+import re
+
 import pytz
-
 import requests
-from bs4 import BeautifulSoup
 
-email = ''
-passwd = ''
+
+email, passwd = sys.argv[1:]
 session = requests.session()
+timezone = pytz.timezone('Asia/Shanghai')
+host = 'https://flyingbird.pro'
+print(datetime.datetime.now(timezone).strftime("%Y-%m-%d %H:%M:%S"))
 
 
 def log(msg):
     print(msg)
-    os.system(f'echo "{msg}">> log')
+    os.system(f'echo "{msg}" >> log')
 
 
-def login(host):
-    url = f'{host}/auth/login'
-    params = {
-        'email': email,
-        'passwd': passwd,
-    }
-    res = session.post(url=url, data=params, timeout=10)
-    msg = res.json()['msg']
-    if msg == '登录成功':
-        # 登陆成功之后，更新hosts.txt
-        log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
-        log(f'login {host}')
-        html = session.get(f'{host}/user').text
-        soup = BeautifulSoup(html, 'lxml')
-        hosts = []
-        for i in soup.find_all('h5'):
-            host = i.find('a', text=re.compile('http.*'))
-            if host:
-                hosts.append(host.text)
-        with open('hosts.txt', 'w', encoding='utf-8') as f:
-            for i in hosts:
-                f.write(f'{i}\n')
-    else:
-        raise Exception(msg)
+# 1.login
+res = session.post(url=f'{host}/auth/login',
+                   data={'email': email, 'passwd': passwd})
+message = res.json()['msg']
+if message != '登录成功':
+    log('login fail')
+    raise Exception(message)
+log('login success')
 
+# 2.checkin
+response = session.post(url=f'{host}/user/checkin')
+log(response.json()['msg'])
 
-def checkin(host) -> str:
-    url = f'{host}/user/checkin'
-    response = session.post(url=url)
-    return response.json()['msg']
-
-
-if __name__ == '__main__':
-    email, passwd = sys.argv[1:]
-
-    hosts = [line.strip() for line in open('hosts.txt', 'r', encoding='utf-8').readlines()]
-    for host in hosts:
-        try:
-            login(host)
-            log(checkin(host)+'\n')
-            exit(0)
-        except Exception as e:
-            continue
-    log(datetime.datetime.now(pytz.timezone('Asia/Shanghai')).strftime("%Y-%m-%d %H:%M:%S"))
-    log("服务器炸了\n")
+# 3.log remain and today's network flow
+html = session.get(url=f'{host}/user').text
+remain_flow = (re.findall('\"Unused_Traffic\", \".+GB', html)[0]
+               .replace('\"Unused_Traffic\", \"', ''))
+today_flow = re.findall('今日已用: .+GB', html)[0]
+log(today_flow)
+log(f'剩余流量: {remain_flow}'+'\n')
