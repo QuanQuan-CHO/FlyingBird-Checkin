@@ -2,8 +2,8 @@
 
 # 使用
 1. 点击Settings->Secrets->Actions->New repository secret，依次配置`EMAIL`、`PASSWD`
-    - EMAIL 是suying666的账号
-    - PASSWD 是suying666的密码
+    - EMAIL 是FlyingBird的账号
+    - PASSWD 是FlyingBird的密码
 
 2. 先在Actions页面将GitHub Action启用，再选择对应的workflow，将scheduled workflow启用
    ![enable-schedule-workflow](https://user-images.githubusercontent.com/90035785/224888848-be15ba52-1892-4a2b-9cef-b321b9a25165.jpg)
