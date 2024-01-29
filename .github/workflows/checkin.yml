@@ -22,7 +22,7 @@ jobs:
       - run: pip install -r requirements.txt
 
       - name: 3. do checkin...
-        run: python index.py ${{ secrets.EMAIL }} ${{ secrets.PASSWD }}
+        run: python main.py ${{ secrets.EMAIL }} ${{ secrets.PASSWD }}
 
       - name: 4. commit...
         run: |
