@@ -10,7 +10,6 @@ email, passwd = sys.argv[1:]
 session = requests.session()
 timezone = pytz.timezone('Asia/Shanghai')
 host = 'https://flyingbird.pro'
-print(datetime.datetime.now(timezone).strftime("%Y-%m-%d %H:%M:%S"))
 
 
 def log(msg):
@@ -18,12 +17,13 @@ def log(msg):
     os.system(f'echo "{msg}" >> log')
 
 
+log(datetime.datetime.now(timezone).strftime("%Y-%m-%d %H:%M:%S"))
 # 1.login
 res = session.post(url=f'{host}/auth/login',
                    data={'email': email, 'passwd': passwd})
 message = res.json()['msg']
 if message != '登录成功':
-    log('login fail')
+    log('login fail\n')
     raise Exception(message)
 log('login success')
 
