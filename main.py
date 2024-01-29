@@ -6,7 +6,6 @@ import re
 import pytz
 import requests
 
-
 email, passwd = sys.argv[1:]
 session = requests.session()
 timezone = pytz.timezone('Asia/Shanghai')
