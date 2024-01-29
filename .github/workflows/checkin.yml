@@ -1,8 +1,8 @@
 name: Suying666-Auto-Checkin
 on:
   workflow_dispatch:
-# schedule:
-#   - cron: '0 16 * * *'
+  schedule: #23:30
+   - cron: '30 15 * * *'
 permissions: write-all
 jobs:
   checkin:
