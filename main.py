@@ -33,8 +33,8 @@ log(response.json()['msg'])
 
 # 3.log remain and today's network flow
 html = session.get(url=f'{host}/user').text
-remain_flow = (re.findall('\"Unused_Traffic\", \".+GB', html)[0]
+remain_flow = (re.findall('\"Unused_Traffic\", \".+[GMK]B', html)[0]
                .replace('\"Unused_Traffic\", \"', ''))
-today_flow = re.findall('今日已用: .+GB', html)[0]
+today_flow = re.findall('今日已用: .+[GMK]B', html)[0]
 log(today_flow)
 log(f'剩余流量: {remain_flow}'+'\n')
